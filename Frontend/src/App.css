@@ -12,7 +12,6 @@ body {
   background: white;
   padding: 25px;
   border-radius: 15px;
-
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
@@ -34,7 +33,7 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin: 8px 0;
   border-radius: 8px;
@@ -102,4 +101,13 @@ button:hover {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+}
+p {
+  font-size: 14px;
+  color: white;
 }
