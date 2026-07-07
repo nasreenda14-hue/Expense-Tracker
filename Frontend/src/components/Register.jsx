@@ -45,7 +45,7 @@ function Register() {
         .then(
           (res) => localStorage.setItem("token", res.data.token),
           alert("Registration successful"),
-          navigate("/login"),
+          navigate("/"),
         )
         .catch((err) => console.log(err));
       setName("");

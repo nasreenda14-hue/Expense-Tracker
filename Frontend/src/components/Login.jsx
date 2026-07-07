@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -44,11 +44,12 @@ function Login() {
       setPassword("");
     }
   };
+  
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/expenses"); // auto login
+      navigate("/expenses"); 
     }
   }, []);
   return (
@@ -68,7 +69,6 @@ function Login() {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              console.log(email);
             }}
           />
           <p>{error.email}</p>
@@ -79,16 +79,15 @@ function Login() {
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
-              console.log(password);
             }}
           />
           <p>{error.password}</p>
           <button>Login</button>
         </form>
-        <p>
+        <p className="para">
           Don't have an account?
           <span>
-            <a href="/register"> Sign up</a>
+            <Link to="/register">Sign up</Link>
           </span>
         </p>
         {loginError && <p style={{ color: "red" }}>{loginError}</p>}

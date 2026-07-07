@@ -1,13 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect} from "react";
 import axios from "axios";
-import { useEffect } from "react";
+
 
 function Dashboard() {
   const [expense, setExpense] = useState([]);
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [editId, setEditId] = useState(null);
+
+  
 
   const handleAdd = () => {
     if (!title || !amount) {
@@ -61,7 +63,28 @@ function Dashboard() {
       .get("http://localhost:5000/expenses")
       .then((res) => setExpense(res.data));
   }, []);
+  useEffect(() => {
+  const token = localStorage.getItem("token");
 
+  if (token) {
+    axios.get("http://localhost:5000/api/user/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then(res => {
+      console.log(res.data.user);
+    })
+    .catch(() => {
+      console.log("Not authorized");
+    });
+  }
+}, []);
+
+  const handleLogout=()=>{
+    localStorage.removeItem("token");
+    window.location.href="/";
+  }
   const total = expense.reduce((sum, exp) => sum + Number(exp.amount), 0);
   return (
     <div>
@@ -109,6 +132,7 @@ function Dashboard() {
           </div>
         ))}
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
