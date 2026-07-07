@@ -33,15 +33,10 @@ function Register() {
     console.log(isValid);
 
     if (isValid === true) {
-      const userData = {
-        name,
-        email,
-        password,
-      };
 
       console.log(userData);
       axios
-        .post("http://localhost:5000/api/user/register", userData)
+        .post("http://localhost:5000/api/user/register", {name, email, password})
         .then(
           (res) => localStorage.setItem("token", res.data.token),
           alert("Registration successful"),

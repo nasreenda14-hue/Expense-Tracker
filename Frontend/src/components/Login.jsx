@@ -51,7 +51,7 @@ function Login() {
     if (token) {
       navigate("/expenses"); 
     }
-  }, []);
+  }, [navigate]);
   return (
     <div>
       <h1>Login</h1>
