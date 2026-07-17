@@ -1,9 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Register from "./components/Register";
+import Register from "./pages/Register";
 import ProtectedRoute from "./routes/ProtecterdRoute";
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
-          path="/expenses"
+          path="/dashboard"
           element={
             <ProtectedRoute>
               <Dashboard />
