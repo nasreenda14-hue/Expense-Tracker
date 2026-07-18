@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors";
 import Expense from "./models/expense.js";
 import connectDB from "./config/db.js";
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", userRouter);
 // app.use("/api/expenses", expenseRoute);
 
-dotenv.config();
+
 connectDB();
 
 // app.get("/expenses", (req, res) => {

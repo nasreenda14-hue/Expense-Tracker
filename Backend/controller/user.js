@@ -3,15 +3,13 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-
-
-
-  const createToken = (id) => {
-    console.log("JWT_SECRET:", process.env.JWT_SECRET);
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
-    });
-  };
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  
+    
+  });
+};
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
@@ -21,7 +19,9 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ message: "User not found,create an account" });
+      return res
+        .status(404)
+        .json({ message: "User not found,create an account" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -29,9 +29,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid password" });
     }
     const token = createToken(user._id);
-    console.log(createToken(user._id));
     res.status(200).json({
-      
       message: "Login successful",
       token,
       user: {
@@ -45,7 +43,6 @@ export const login = async (req, res) => {
 };
 
 export const register = async (req, res) => {
- 
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
     return res.status(400).json({ message: "Please enter all fields" });
@@ -53,10 +50,10 @@ export const register = async (req, res) => {
   if (!validator.isEmail(email)) {
     return res.status(400).json({ message: "Please enter a valid email" });
   }
-  if (password.length < 8) {
+  if (password.length < 6) {
     return res
       .status(400)
-      .json({ message: "Password must be at least 8 characters" });
+      .json({ message: "Password must be at least 6 characters" });
   }
   try {
     const existingUser = await User.findOne({ email });
@@ -84,18 +81,17 @@ export const register = async (req, res) => {
   }
 };
 
-
-export const getCurrentUser=async (req,res)=>{
-  try{
-     const user = await User.findById(req.user.id).select("-password");
+export const getCurrentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
-    }res.json({
+    }
+    res.json({
       user,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-  }
-
+};
