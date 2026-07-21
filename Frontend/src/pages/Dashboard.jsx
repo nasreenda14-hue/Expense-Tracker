@@ -14,7 +14,7 @@ export default function Dashboard() {
   const token = localStorage.getItem("token");
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/expenses/${deleteId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/expenses/${deleteId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

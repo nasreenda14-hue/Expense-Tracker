@@ -40,7 +40,7 @@ export default function Login() {
 
     if (isValid) {
       axios
-        .post("http://localhost:5000/api/user/login", {
+        .post(`${import.meta.env.VITE_API_URL}/api/user/login`, {
           email,
           password,
         })

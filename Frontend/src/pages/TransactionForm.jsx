@@ -21,7 +21,7 @@ export default function TransactionForm({
         description: editData.description,
         amount: editData.amount,
         type: editData.type,
-        date: editData.date.split("T")[0], // important for input type="date"
+        date: editData.date.split("T")[0], 
       });
     }
   }, [editData]);
@@ -36,9 +36,9 @@ export default function TransactionForm({
 
     try {
       if (editData) {
-        // ✏️ UPDATE
+        
         await axios.put(
-          `http://localhost:5000/api/expenses/${editData._id}`,
+          `${import.meta.env.VITE_API_URL}/api/expenses/${editData._id}`,
           formData,
           {
             headers: {
@@ -47,8 +47,8 @@ export default function TransactionForm({
           },
         );
       } else {
-        // ➕ CREATE
-        await axios.post("http://localhost:5000/api/expenses", formData, {
+        
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/expenses`, formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -57,7 +57,7 @@ export default function TransactionForm({
 
       fetchExpenses();
       setShowForm(false);
-      setEditData(null); // ✅ reset edit mode
+      setEditData(null); 
     } catch (error) {
       console.log(error);
     }

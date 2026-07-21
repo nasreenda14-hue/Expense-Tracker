@@ -45,7 +45,7 @@ export default function Register() {
 
     if (isValid) {
       axios
-        .post("http://localhost:5000/api/user/register", formData)
+        .post(`${import.meta.env.VITE_API_URL}/user/register`, formData)
         .then((res) => {
           alert("Registered Successfully!");
           navigate("/");
