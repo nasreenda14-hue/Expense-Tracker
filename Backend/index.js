@@ -6,7 +6,7 @@ import cors from "cors";
 import Expense from "./models/expense.js";
 import connectDB from "./config/db.js";
 import userRouter from "./routes/userRoute.js";
-// import expenseRoute from "./routes/expenseRoute.js";
+import expenseRoute from "./routes/expenseRoute.js";
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", userRouter);
-// app.use("/api/expenses", expenseRoute);
+app.use("/api/expenses", expenseRoute);
 
 
 connectDB();

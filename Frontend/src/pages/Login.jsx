@@ -105,8 +105,6 @@ export default function Login() {
           </button>
         </form>
 
-        <button>login</button>
-
         <p className="text-gray-500 text-sm text-center mt-6">
           Don’t have an account?{" "}
           <span

@@ -1,34 +1,33 @@
-// import mongoose from "mongoose";
-
-// const ExpenseSchema = new mongoose.Schema({
-//   title: String,
-//   amount: Number,
-// });
-
-// const Expense = mongoose.model("Expense", ExpenseSchema);
-// export default Expense;
-// models/Expense.js
 import mongoose from "mongoose";
 
-const expenseSchema = new mongoose.Schema(
-  {
-    user: {
+const expenseSchema = new mongoose.Schema({
+  user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
-    title: String,
-    description: String,
-    amount: Number,
-    type: {
-      type: String,
-      enum: ["income", "expense"],
-    },
-    date: {
-      type: Date,
-      default: Date.now,
-    },
+  title: {
+    type: String,
+    required: true,
   },
-  { timestamps: true }
-);
+  description: {
+    type: String,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  type: {
+    type: String,
+    enum: ["expense", "income"],
+    default: "expense",
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-export default mongoose.model("Expense", expenseSchema);
+const Expense = mongoose.model("Expense", expenseSchema);
+
+export default Expense;

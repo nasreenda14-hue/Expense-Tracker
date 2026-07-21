@@ -1,0 +1,10 @@
+@import url('https://googleapis.com'); /* Free Google alternative for Old English */
+
+@layer base {
+  @font-face {
+    font-family: 'Engravers Old English';
+    src: local('Engravers Old English'), local('EngraversOldEnglishBT-Regular');
+    /* Fallback to a free Google web font if the local file is missing */
+    font-display: swap;
+  }
+}
